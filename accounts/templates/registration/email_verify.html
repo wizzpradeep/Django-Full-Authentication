@@ -1,0 +1,9 @@
+{% extends 'navBar.html' %}
+
+{% block form_name %}
+Your email has been verifid
+<br>
+
+<a href="{% url 'signin' %}"
+    class="font-bold text-sm hover:bg-black hover:text-white text-xl p-2 font-bold rounded bg-white">Login</a>
+{% endblock %}

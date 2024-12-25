@@ -1,0 +1,54 @@
+{% extends 'navBar.html' %}
+
+{% block title %}
+Signin
+{% endblock %}
+
+{% block form_name %}
+Signin
+{% endblock %}
+
+
+
+{% block form %}
+
+
+
+<form action="{% url 'signin' %}" method="post" class="mx-auto mt-10 h-4/5 w-4/5 flex flex-col gap-5">
+    {% csrf_token %}
+
+    {% for mess in messages %}
+    <li class="text-yellow-900 font-bold">{{mess}}</li>
+    {% endfor %}
+
+    {% for error in form.non_field_errors %}
+    <li>{{error}}</li>
+    {% endfor %}
+
+    <div class="email">
+        <input type="email" name="username" id="id_username" placeholder="Email"
+            class="bg-gray-800 text-white font-bold rounded-2xl p-3 w-full text-center text-xl">
+        {% for errors in form.username.errors %}
+        <li>{{ errors }}</li>
+        {% endfor %}
+    </div>
+
+    <div class="password">
+        <input type="password" name="password" id="id_password" placeholder="Password"
+            class="bg-gray-800 text-white font-bold rounded-2xl p-3 w-full text-center text-xl ">
+        {% for errors in form.password.errors %}
+        <li> {{errors}} </li>
+        {% endfor %}
+    </div>
+    <a href="{% url 'password_reset' %}" class="text-blue-600 hover:underline">forgot password</a>
+
+
+    <div class="flex w-full justify-center gap-10">
+        <input type="submit" value="Login"
+            class="rounded w-full rounded text-2xl font-bold text-center p-2 cursor-pointer bg-violet-800 text-white hover:bg-violet-900 ">
+    </div>
+    <a href="{% url 'signup' %}" class="text-center m-auto w-fit text-blue-700 hover:text-green-900">
+        create an account!
+    </a>
+</form>
+{% endblock %}

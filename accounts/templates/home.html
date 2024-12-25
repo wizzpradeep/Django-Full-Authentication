@@ -1,0 +1,41 @@
+{% extends 'navBar.html' %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block form %}
+
+<div class=" flex flex-col gap-2">
+
+
+    {% for mess in messages %}
+    <li class="text-yellow-900 font-bold">{{mess}}</li>
+    {% endfor %}
+
+
+    {% if request.user.is_authenticated %}
+    <h1 class="w-fit mx-auto font-bold text-3xl mb-10 hover:text-gray-700">
+        You are welcome, {{user.first_name}} {{user.last_name}}
+    </h1>
+
+
+    <a href="{% url 'logout' %}" class="{{classes}}">Logout</a>
+    <a href="{% url 'password_change' %}" class="{{classes}}">Change Password</a>
+    <p>Name : {{user.first_name}} {{user.last_name}}</p>
+    <p>Email : {{user.email}}</p>
+
+    {% else %}
+
+    <h1 class=" w-fit mx-auto font-bold text-3xl mb-10 hover:text-gray-700">
+
+        You are not logged in!
+    </h1>
+
+    <a href="{% url 'signin' %}" class="{{classes}}">Login</a>
+
+    {% endif %}
+
+
+</div>
+{% endblock %}

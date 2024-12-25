@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <style>
+        * {
+            user-select: none;
+        }
+    </style> -->
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+</head>
+
+<body>
+    <div class="w-fullh-10 bg-violet-900">
+        <ul class="w-1/2 flex justify-between mx-auto">
+            <a href="{% url 'home' %}" class="font-bold uppercase text-white hover:underline p-2">home</a>
+            <a href="{% url 'signin' %}" class="font-bold uppercase text-white hover:underline p-2">signin</a>
+            <a href="{% url 'signup' %}" class="font-bold uppercase text-white hover:underline p-2">signup</a>
+        </ul>
+    </div>
+    <div class="bg-violet-900 h-screen w-full fixed ">
+        <h1 class="text-5xl font-bold text-white text-center mt-10">
+            {% if not request.user.is_authenticated %}
+            Authentication
+            {% else %}
+            {{user.email}}
+            {% endif %}
+        </h1>
+        <div class="box m-auto w-3/4 h-fit pb-10 bg-gray-300 mt-10 rounded-3xl p-3 shadow-3xl ">
+            <h1 class="text-center font-bold capilatize text-3xl "> {% block form_name %}
+                {% endblock %}</h1>
+            {% block form %}
+            {% endblock %}
+        </div>
+    </div>
+</body>
+
+</html>
